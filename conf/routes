@@ -3,8 +3,12 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
-GET     /Users                      controllers.Application.getUsers()
-POST    /User                       controllers.Application.addUser()
+GET    /               @controllers.Application.login()
+GET    /index          @controllers.Application.index()
+GET    /post           @controllers.Application.post()
+GET    /GetPost        @controllers.Application.getPost()
+POST   /Logining       @controllers.Application.auth()
+POST   /User           @controllers.Application.addUser()
+POST   /createPost     @controllers.Application.create()
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET    /assets/*file   controllers.Assets.at(path="/public", file)

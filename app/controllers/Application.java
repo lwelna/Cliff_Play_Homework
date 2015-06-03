@@ -1,35 +1,96 @@
 package controllers;
-import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import javax.persistence.EntityManager;
+
+import model.User;
+
+import models.UserDb;
+
+import services.PostService;
+import services.UserService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import play.data.Form;
+import play.libs.Json;
+import play.mvc.Controller;
+import play.mvc.Result;
+
+import views.html.*;
+
+import model.Post;
+
+import model.Input;
+
 import play.*;
 import play.mvc.*;
 
-import views.html.*;
 import java.util.List;
-import java.util.Date;
-import java.util.Iterator;
-
-
-import org.hibernate.*;
-import org.hibernate.cfg.Configuration;
-
 
 @org.springframework.stereotype.Controller
 public class Application extends Controller {
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private PostService postService;
 
-    public static Result index() {
-//        connection();
+    private UserDb user;
 
-        return ok(index.render("hello, world.", play.data.Form.form(models.User.class)));
+    public UserDb getUser() {
+        return user;
+    }
+
+    public void setUser(UserDb user) {
+        this.user = user;
+    }
+
+    public Result index() {
+        return play.mvc.Controller.ok(index.render("Cliff's Blogging Site", Form.form(model.User.class)));
 
     }
-    public static Result getUsers() {
-        java.util.List<models.User> tasks = new play.db.ebean.Model.Finder(String.class, models.User.class).all();
-        return ok(play.libs.Json.toJson(tasks));
+
+    public Result login() {
+
+        return play.mvc.Controller.ok(login.render("Cliff's Blogging Site", Form.form(Input.class)));
+
     }
+
+    public Result post() {
+
+        return play.mvc.Controller.ok(post.render("Cliff's Blogging Site", Form.form(Input.class)));
+
+    }
+
+    public Result create() {
+        Form<Input> form = Form.form(Input.class).bindFromRequest();
+        Input loginValue = form.get();
+        String user = play.mvc.Controller.session("connected");
+        System.out.println(user);
+        postService.addPost(loginValue.getInput(), user);
+        return play.mvc.Controller.redirect(controllers.routes.Application.post());
+
+    }
+
+    public Result auth() {
+        Form<Input> form = Form.form(Input.class).bindFromRequest();
+        Input loginValue = form.get();
+
+        boolean exists = userService.checkUser(loginValue.getInput());
+        if (exists) {
+            System.out.println(loginValue.getInput());
+            play.mvc.Controller.session("connected", loginValue.getInput());
+            return play.mvc.Controller.redirect(controllers.routes.Application.post());
+        }
+        return play.mvc.Controller.ok(login.render("Cliff's Blogging Site", Form.form(Input.class)));
+    }
+
+    public Result getPost() {
+        List<Post> posts = postService.getAllPost();
+        return ok(play.libs.Json.toJson(posts));
+    }
+
+//    public Result getUsers() {
+//
+//        return ok(play.libs.Json.toJson());
+//    }
 //    public static void connection(){
 //        Connection conn = null;
 //        try {
@@ -38,21 +99,28 @@ public class Application extends Controller {
 //            System.out.println("failed");
 //        }
 //    }
-    public static Result addUser() {
-        play.data.Form<models.User> form = play.data.Form.form(models.User.class).bindFromRequest();
+    public Result addUser() {
+//
+        Form<User> form = Form.form(User.class).bindFromRequest();
+        User user = form.get();
+        System.out.println(user.getFirstName());
+        System.out.println(user.getLastName());
+        System.out.println(user.getUser());
+
+        // userService.addUser(user);
+        // return play.mvc.Controller.redirect(controllers.routes.Application.index());
+//
+//
+//
+////        play.data.Form<models.User> form = play.data.Form.form(models.User.class).bindFromRequest();
         if (form.hasErrors()) {
-            return badRequest(index.render("hello, world", form));
+            System.out.println("bad stuff");
+            return badRequest(index.render("Cliff's Blogging Site", form));
         }
         else {
-            models.User task = form.get();
-            task.save();
-            return redirect(routes.Application.index());
+            // model.User task = form.get();
+            userService.addUser(user);
+            return play.mvc.Controller.redirect(controllers.routes.Application.post());
         }
-    }
-    public static void createUser(){
-
-    }
-    public static void checkUser(){
-
     }
 }

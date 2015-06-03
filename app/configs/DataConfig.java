@@ -27,12 +27,14 @@ public class DataConfig {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setShowSql(true);
         vendorAdapter.setGenerateDdl(true);
+        vendorAdapter.setDatabasePlatform(Play.application().configuration().getString("db.default.dialect"));
+        //System.out.println(Play.application().configuration().getString("db.default.dialect"));
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setPackagesToScan("models");
         entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
         entityManagerFactory.setDataSource(dataSource());
         entityManagerFactory.setJpaPropertyMap(new HashMap<String, String>(){{
-            put("hibernate.hbm2ddl.auto", "update");
+            put("hibernate.hbm2ddl.auto", "drop-create");
         }});
         entityManagerFactory.afterPropertiesSet();
         return entityManagerFactory.getObject();
@@ -48,10 +50,16 @@ public class DataConfig {
     @Bean
     public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        System.out.println(Play.application().configuration().getString("db.default.driver"));
+//        System.out.println(Play.application().configuration().getString("db.default.url"));
+//        System.out.println(Play.application().configuration().getString("db.default.user"));
+//        System.out.println(Play.application().configuration().getString("db.default.password"));
+
         dataSource.setDriverClassName(Play.application().configuration().getString("db.default.driver"));
         dataSource.setUrl(Play.application().configuration().getString("db.default.url"));
         dataSource.setUsername(Play.application().configuration().getString("db.default.user"));
         dataSource.setPassword(Play.application().configuration().getString("db.default.password"));
+        //dataSource.setDialect(Play.application().configuration().getString("db.default.password"));
         return dataSource;
     }
 }
