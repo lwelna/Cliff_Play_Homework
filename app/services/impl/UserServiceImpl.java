@@ -20,7 +20,7 @@ import javax.persistence.Query;
 import javax.transaction.Transaction;
 
 import models.UserDb;
-
+import org.slf4j.*;
 
 @Service
 @Transactional
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService{
     public boolean checkUser(String username) {
        @SuppressWarnings("unchecked")
     List<UserDb> query = em.createQuery("SELECT a FROM UserDb a WHERE a.user_name = :username").setParameter("username", username).getResultList();
-       System.out.println((query.get(0)).getId());
+     //  System.out.println((query.get(0)).getId());
        if(query.size() >= 1)
        {
 //           System.out.println(query.get(0).getUserName());

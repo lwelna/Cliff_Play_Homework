@@ -1,3 +1,6 @@
+import views.html.*;
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +12,7 @@ import org.junit.*;
 import play.mvc.*;
 import play.test.*;
 import play.data.DynamicForm;
+import play.data.Form;
 import play.data.validation.ValidationError;
 import play.data.validation.Constraints.RequiredValidator;
 import play.i18n.Lang;
@@ -36,10 +40,22 @@ public class ApplicationTest {
 
     @Test
     public void renderTemplate() {
-        Content html = views.html.index.render("Your new application is ready.");
+        Content html = add.render("CLIFF'S BLOGGING SITE",Form.form(model.User.class));
         assertThat(contentType(html)).isEqualTo("text/html");
-        assertThat(contentAsString(html)).contains("Your new application is ready.");
+        assertThat(contentAsString(html)).contains("CLIFF&#x27;S BLOGGING SITE");
     }
 
+    @Test
+    public void renderLogin() {
+        Content html = login.render("CLIFF'S BLOGGING SITE",Form.form(model.Input.class));
+        assertThat(contentType(html)).isEqualTo("text/html");
+        assertThat(contentAsString(html)).contains("CLIFF&#x27;S BLOGGING SITE");
+    }
 
+    @Test
+    public void renderPost() {
+        Content html = post.render("CLIFF'S BLOGGING SITE",Form.form(model.Input.class));
+        assertThat(contentType(html)).isEqualTo("text/html");
+        assertThat(contentAsString(html)).contains("CLIFF&#x27;S BLOGGING SITE");
+    }
 }

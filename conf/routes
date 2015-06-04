@@ -4,7 +4,7 @@
 
 # Home page
 GET    /               @controllers.Application.login()
-GET    /index          @controllers.Application.index()
+GET    /add          @controllers.Application.add()
 GET    /post           @controllers.Application.post()
 GET    /GetPost        @controllers.Application.getPost()
 POST   /Logining       @controllers.Application.auth()

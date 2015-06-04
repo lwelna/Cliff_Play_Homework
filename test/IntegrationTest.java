@@ -16,11 +16,29 @@ public class IntegrationTest {
      * in this example we just check if the welcome page is being shown
      */
     @Test
+    public void testIndex() {
+        running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+            public void invoke(TestBrowser browser) {
+                browser.goTo("http://localhost:3333/add");
+                assertThat(browser.pageSource()).contains("CLIFF'S BLOGGING SITE");
+            }
+        });
+    }
+    @Test
     public void test() {
         running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
             public void invoke(TestBrowser browser) {
-                browser.goTo("http://localhost:3333");
-                assertThat(browser.pageSource()).contains("Your new application is ready.");
+                browser.goTo("http://localhost:3333/");
+                assertThat(browser.pageSource()).contains("CLIFF'S BLOGGING SITE");
+            }
+        });
+    }
+    @Test
+    public void testPost() {
+        running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+            public void invoke(TestBrowser browser) {
+                browser.goTo("http://localhost:3333/post");
+                assertThat(browser.pageSource()).contains("CLIFF'S BLOGGING SITE");
             }
         });
     }

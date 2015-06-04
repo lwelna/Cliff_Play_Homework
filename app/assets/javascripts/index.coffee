@@ -1,4 +1,4 @@
 $ ->
   $.get "/GetPost", (data) ->
-    $.each data, (index, Post) ->
-      $("#GetPost").append $("<li>").text Post.post
+    $.each data, (index, post) ->
+      $("#post").append "<li> " +post.post+"<br>Username : "+post.user+"      "+"       Date : "+post.date+"</li>"

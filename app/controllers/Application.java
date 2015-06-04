@@ -1,5 +1,6 @@
 package controllers;
 
+import org.slf4j.LoggerFactory;
 import model.User;
 
 import models.UserDb;
@@ -16,8 +17,8 @@ import play.mvc.Result;
 
 import views.html.*;
 
+import org.slf4j.Logger;
 import model.Post;
-
 import model.Input;
 
 import play.*;
@@ -34,6 +35,10 @@ public class Application extends Controller {
 
     private UserDb user;
 
+    private static final Logger log =LoggerFactory.getLogger(Application.class);
+
+
+
     public UserDb getUser() {
         return user;
     }
@@ -42,49 +47,55 @@ public class Application extends Controller {
         this.user = user;
     }
 
-    public Result index() {
-        return play.mvc.Controller.ok(index.render("Cliff's Blogging Site", Form.form(model.User.class)));
+    public Result add() {
+        log.info("------------------------------------Someone Entering Add user-----------------------------------------------");
+        return play.mvc.Controller.ok(add.render("Cliff's Blogging Site", Form.form(model.User.class)));
 
     }
 
     public Result login() {
-
+        log.info("------------------------------------Someone Entering main site-----------------------------------------------");
         return play.mvc.Controller.ok(login.render("Cliff's Blogging Site", Form.form(Input.class)));
 
     }
 
     public Result post() {
-
+        log.info("------------------------------------Someone Entering Posts-----------------------------------------------");
         return play.mvc.Controller.ok(post.render("Cliff's Blogging Site", Form.form(Input.class)));
 
     }
 
     public Result create() {
+        log.info("Creating user");
         Form<Input> form = Form.form(Input.class).bindFromRequest();
         Input loginValue = form.get();
         String user = play.mvc.Controller.session("connected");
-        System.out.println(user);
+        log.info("Creating user with username"+ user );
         postService.addPost(loginValue.getInput(), user);
         return play.mvc.Controller.redirect(controllers.routes.Application.post());
 
     }
 
     public Result auth() {
+        log.info("Checking auth");
         Form<Input> form = Form.form(Input.class).bindFromRequest();
         Input loginValue = form.get();
 
         boolean exists = userService.checkUser(loginValue.getInput());
         if (exists) {
-            System.out.println(loginValue.getInput());
+            log.info("Checking auth complete they exist");
+            //System.out.println(loginValue.getInput());
             play.mvc.Controller.session("connected", loginValue.getInput());
             return play.mvc.Controller.redirect(controllers.routes.Application.post());
         }
-        return play.mvc.Controller.ok(login.render("Cliff's Blogging Site", Form.form(Input.class)));
+        log.info("Checking auth complete they don't exist");
+        return badRequest(login.render("Cliff's Blogging Site", form));
     }
 
     public Result getPost() {
-        List<Post> posts = postService.getAllPost();
-        return ok(play.libs.Json.toJson(posts));
+        log.info("Getting All posts");
+        List<Post> post = postService.getAllPost();
+        return play.mvc.Controller.ok(Json.toJson(post));
     }
 
 //    public Result getUsers() {
@@ -101,11 +112,15 @@ public class Application extends Controller {
 //    }
     public Result addUser() {
 //
+        log.info("Adding new user-----------------------------------------");
         Form<User> form = Form.form(User.class).bindFromRequest();
         User user = form.get();
-        System.out.println(user.getFirstName());
-        System.out.println(user.getLastName());
-        System.out.println(user.getUser());
+        log.info(user.getFirstName());
+        log.info(user.getLastName());
+        log.info(user.getUser());
+//        System.out.println(user.getFirstName());
+//        System.out.println(user.getLastName());
+//        System.out.println(user.getUser());
 
         // userService.addUser(user);
         // return play.mvc.Controller.redirect(controllers.routes.Application.index());
@@ -114,11 +129,12 @@ public class Application extends Controller {
 //
 ////        play.data.Form<models.User> form = play.data.Form.form(models.User.class).bindFromRequest();
         if (form.hasErrors()) {
-            System.out.println("bad stuff");
-            return badRequest(index.render("Cliff's Blogging Site", form));
+            log.info("Errors in Form");
+            return badRequest(add.render("Cliff's Blogging Site", form));
         }
         else {
             // model.User task = form.get();
+            log.info("Adding User");
             userService.addUser(user);
             return play.mvc.Controller.redirect(controllers.routes.Application.post());
         }

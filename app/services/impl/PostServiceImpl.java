@@ -21,7 +21,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
+import org.slf4j.*;
 @Service
 @Transactional
 public class PostServiceImpl implements PostService {
@@ -54,7 +54,8 @@ public class PostServiceImpl implements PostService {
             temp.setPostId(post.get(i).getIdPost());
             temp.setPost(post.get(i).getPost());
             temp.setUser(post.get(i).getUserName());
-            System.out.println(temp.getPost());
+           // System.out.println(temp.getPost());
+            newPost.add(temp);
         }
         return newPost;
     }
