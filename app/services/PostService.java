@@ -1,10 +1,10 @@
 package services;
 
-import model.Post;
+import models.UserPost;
 
 import java.util.List;
 
 public interface PostService {
-    void addPost(String post, String id);
-    List<Post> getAllPost();
+    void addUserPost(String post, String username);
+    List<UserPost> getAllPost();
 }

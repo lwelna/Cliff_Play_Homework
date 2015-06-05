@@ -1,12 +1,22 @@
 package models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class UserDb {
+@Table(name="user")
+public class UserInfo {
+
+    @Id
+    @GeneratedValue()
+    @Column(name="id")
+    private int id;
+
     @Column(name="first_name")
     private String first_name;
 
@@ -15,12 +25,8 @@ public class UserDb {
 
     @GeneratedValue()
     @Column(name="date")
-    private String date;
+    private Date date;
 
-    @Id
-    @GeneratedValue()
-    @Column(name="id")
-    private int id;
 
     @Column(name="user_name")
     private String user_name;
@@ -49,11 +55,11 @@ public class UserDb {
         this.user_name = user_name;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String string) {
+    public void setDate(Date string) {
         this.date = string;
     }
 

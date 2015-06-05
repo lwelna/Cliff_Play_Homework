@@ -1,7 +1,7 @@
-@(message: String, form:  play.data.Form[model.Input])
+@(message: String, form:  play.data.Form[model.UserPostInput])
 @implicitFieldConstructor = @{ helper.FieldConstructor(twitterBootstrapInput.render) }
 
-@main("Cliff's Blog") {
+@postMain("Cliff's Blog") {
 
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
@@ -17,7 +17,7 @@
         </div>
 
         @helper.form(action = routes.Application.create(), 'class -> "well form-horizontal") {
-            @helper.inputText(form("input"),'_label -> "Add Post")
+            @helper.inputText(form("inputField"),'_label -> "Add Post")
             <div class="controls">
                 <input type="submit" class="btn btn-primary"/>
             </div>

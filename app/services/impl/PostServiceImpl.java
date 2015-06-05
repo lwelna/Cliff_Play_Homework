@@ -1,11 +1,11 @@
 package services.impl;
 
-import models.PostDb;
-import models.UserDb;
+
+import models.UserInfo;
+import models.UserPost;
 
 import services.PostService;
 
-import model.Post;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,12 +25,11 @@ public class PostServiceImpl implements PostService {
     private EntityManager em;
 
     @Override
-    public void addPost(String post, String username) {
-        PostDb newPost = new PostDb();
-
+    public void addUserPost(String post, String username) {
+        UserPost newPost = new UserPost();
         newPost.setUserName(username);
         newPost.setPost(post);
-        List<UserDb> query = em.createQuery("SELECT a FROM UserDb a WHERE a.user_name = :username", UserDb.class)
+        List<UserInfo> query = em.createQuery("SELECT a FROM UserInfo a WHERE a.user_name = :username", UserInfo.class)
                         .setParameter("username", username)
                         .getResultList();
         newPost.setId(query.get(0));
@@ -39,21 +38,10 @@ public class PostServiceImpl implements PostService {
         newPost.setDate(dateFormat.format(date));
         em.persist(newPost);
     }
-    
+
     @Override
-    public List<Post> getAllPost() {
-        List<PostDb> post = em.createQuery("SELECT a FROM PostDb a", PostDb.class).getResultList();
-        List<Post> newPost = new ArrayList<Post>();
-        for (int i = 0; i < post.size(); i++){
-            Post temp = new Post();
-            temp.setDate(post.get(i).getDate());
-            temp.setPostId(post.get(i).getIdPost());
-            temp.setPost(post.get(i).getPost());
-            temp.setUser(post.get(i).getUserName());
-           // System.out.println(temp.getPost());
-            newPost.add(temp);
-        }
-        return newPost;
+    public List<UserPost> getAllPost() {
+        return em.createQuery("SELECT a FROM UserPost a", UserPost.class).getResultList();
     }
 
 }

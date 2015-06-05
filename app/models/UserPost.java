@@ -6,25 +6,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class PostDb {
-    @Column(name="user_name")
-    private String userName;
-    
-    @Column(name="date")
-    private String date;
+@Table(name="user_posts")
+public class UserPost {
+
     @Id
     @GeneratedValue()
     @Column(name="id_post")
     private int idPost;
+
+    @Column(name="user_name")
+    private String userName;
+
+    @Column(name="date")
+    private String date;
+
     @Column(name="post")
     private String post;
-    
+
     @ManyToOne
     @JoinColumn(name="id",referencedColumnName="id")
-    private UserDb user;
-    
+    private UserInfo user;
+
     public String getUserName() {
         return userName;
     }
@@ -49,14 +54,10 @@ public class PostDb {
     public void setPost(String post) {
         this.post = post;
     }
-    public UserDb getId() {
+    public UserInfo getId() {
         return user;
     }
-    public void setId(UserDb object) {
+    public void setId(UserInfo object) {
         this.user = object;
     }
-
-
-   // public String contents;
-
 }

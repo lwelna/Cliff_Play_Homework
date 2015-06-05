@@ -4,10 +4,12 @@ import play.data.validation.Constraints.Required;
 
 import java.util.Date;
 
-public class Post {
+public class UserPost {
     private String user;
+
     @Required(message="Post")
     private String post;
+
     private int id;
     private String date;
     private int postId;

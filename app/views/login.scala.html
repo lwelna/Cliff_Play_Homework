@@ -1,4 +1,4 @@
-@(message: String, form:  play.data.Form[model.Input])
+@(message: String, form:  play.data.Form[model.LoginInfo])
 @implicitFieldConstructor = @{ helper.FieldConstructor(twitterBootstrapInput.render) }
 
 @main("Cliff's Blog") {
@@ -14,7 +14,7 @@
         <ul id="user"></ul>
 
         @helper.form(action = routes.Application.auth(), 'class -> "well form-horizontal") {
-            @helper.inputText(form("input"),'_label -> "Login in Using Username")
+            @helper.inputText(form("inputField"),'_label -> "Login in Using Username")
             <div class="controls">
                 <input type="submit" class="btn btn-primary"/>
                 <a href="@routes.Application.add()" class="btn btn-primary" role="button">Create User</a>

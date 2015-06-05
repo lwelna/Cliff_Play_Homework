@@ -12,8 +12,7 @@ import static org.fluentlenium.core.filter.FilterConstructor.*;
 public class IntegrationTest {
 
     /**
-     * add your integration test here
-     * in this example we just check if the welcome page is being shown
+     * Need to add /post tests
      */
     @Test
     public void testIndex() {
