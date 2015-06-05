@@ -1,7 +1,5 @@
 package models;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +11,7 @@ import javax.persistence.ManyToOne;
 public class PostDb {
     @Column(name="user_name")
     private String userName;
+    
     @Column(name="date")
     private String date;
     @Id
@@ -21,9 +20,11 @@ public class PostDb {
     private int idPost;
     @Column(name="post")
     private String post;
+    
     @ManyToOne
     @JoinColumn(name="id",referencedColumnName="id")
     private UserDb user;
+    
     public String getUserName() {
         return userName;
     }

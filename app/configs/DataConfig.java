@@ -5,18 +5,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-
-import play.Logger;
 import play.Play;
 
 import java.util.HashMap;
+
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
@@ -28,7 +26,6 @@ public class DataConfig {
         vendorAdapter.setShowSql(true);
         vendorAdapter.setGenerateDdl(true);
         vendorAdapter.setDatabasePlatform(Play.application().configuration().getString("db.default.dialect"));
-        //System.out.println(Play.application().configuration().getString("db.default.dialect"));
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setPackagesToScan("models");
         entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
@@ -43,23 +40,16 @@ public class DataConfig {
     @Bean
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager(entityManagerFactory());
-
         return transactionManager;
     }
 
     @Bean
     public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        System.out.println(Play.application().configuration().getString("db.default.driver"));
-//        System.out.println(Play.application().configuration().getString("db.default.url"));
-//        System.out.println(Play.application().configuration().getString("db.default.user"));
-//        System.out.println(Play.application().configuration().getString("db.default.password"));
-
         dataSource.setDriverClassName(Play.application().configuration().getString("db.default.driver"));
         dataSource.setUrl(Play.application().configuration().getString("db.default.url"));
         dataSource.setUsername(Play.application().configuration().getString("db.default.user"));
         dataSource.setPassword(Play.application().configuration().getString("db.default.password"));
-        //dataSource.setDialect(Play.application().configuration().getString("db.default.password"));
         return dataSource;
     }
 }

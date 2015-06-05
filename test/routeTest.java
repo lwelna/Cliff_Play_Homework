@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import play.mvc.Result;
 import play.test.WithApplication;
+
 public class routeTest  extends WithApplication {
 
     @Test
@@ -14,16 +15,19 @@ public class routeTest  extends WithApplication {
         Result result = route(fakeRequest(GET, "/post"));
         assertThat(result).isNotNull();
     }
+
     @Test
     public void testLoginRoute() {
         Result result = route(fakeRequest(GET, "/"));
         assertThat(result).isNotNull();
     }
+
     @Test
     public void testIndexRoute() {
         Result result = route(fakeRequest(GET, "/index"));
         assertThat(result).isNotNull();
     }
+
     @Test
     public void testGetPostRoute() {
         Result result = route(fakeRequest(GET, "/GetPost"));

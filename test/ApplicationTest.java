@@ -1,14 +1,13 @@
 import views.html.*;
-
+import model.Input;
+import model.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.*;
-
 import play.mvc.*;
 import play.test.*;
 import play.data.DynamicForm;
@@ -33,28 +32,22 @@ import static org.fest.assertions.Assertions.*;
 public class ApplicationTest {
 
     @Test
-    public void simpleCheck() {
-        int a = 1 + 1;
-        assertThat(a).isEqualTo(2);
-    }
-
-    @Test
     public void renderTemplate() {
-        Content html = add.render("CLIFF'S BLOGGING SITE",Form.form(model.User.class));
+        Content html = add.render("CLIFF'S BLOGGING SITE", Form.form(User.class));
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains("CLIFF&#x27;S BLOGGING SITE");
     }
 
     @Test
     public void renderLogin() {
-        Content html = login.render("CLIFF'S BLOGGING SITE",Form.form(model.Input.class));
+        Content html = login.render("CLIFF'S BLOGGING SITE", Form.form(Input.class));
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains("CLIFF&#x27;S BLOGGING SITE");
     }
 
     @Test
     public void renderPost() {
-        Content html = post.render("CLIFF'S BLOGGING SITE",Form.form(model.Input.class));
+        Content html = post.render("CLIFF'S BLOGGING SITE", Form.form(Input.class));
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains("CLIFF&#x27;S BLOGGING SITE");
     }
