@@ -7,17 +7,17 @@ import java.util.Date;
 public class UserPost {
     private String user;
 
-    @Required(message="Post")
+    @Required(message="Input Is Required To Make A Post")
     private String post;
 
     private int id;
-    private String date;
+    private Date date;
     private int postId;
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
-    public void setDate(String string) {
+    public void setDate(Date string) {
         this.date = string;
     }
     public int getPostId() {

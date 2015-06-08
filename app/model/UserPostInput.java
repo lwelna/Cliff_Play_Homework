@@ -7,11 +7,11 @@ public class UserPostInput {
     @Constraints.Required(message="Requires Input To Create Post")
     private String inputField;
 
-    public String getInput() {
+    public String getInputField() {
         return inputField;
     }
 
-    public void setInput(String input) {
+    public void setInputField(String input) {
         this.inputField = input;
     }
 

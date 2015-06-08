@@ -6,11 +6,11 @@ public class LoginInfo {
     @Constraints.Required(message="Requires Input To Login. Try Again.")
     private String inputField;
 
-    public String getInput() {
+    public String getInputField() {
         return inputField;
     }
 
-    public void setInput(String input) {
+    public void setInputField(String input) {
         this.inputField = input;
     }
 }

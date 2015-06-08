@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +23,7 @@ public class UserPost {
     private String userName;
 
     @Column(name="date")
-    private String date;
+    private Date date;
 
     @Column(name="post")
     private String post;
@@ -36,10 +38,10 @@ public class UserPost {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
-    public void setDate(String string) {
+    public void setDate(Date string) {
         this.date = string;
     }
     public int getIdPost() {
