@@ -3,7 +3,7 @@ package services.impl;
 
 import models.UserInfo;
 import models.UserPostTable;
-import model.UserPost;
+
 import services.PostService;
 
 import org.springframework.stereotype.Service;

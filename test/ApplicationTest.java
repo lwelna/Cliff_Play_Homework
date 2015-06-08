@@ -1,33 +1,21 @@
-import views.html.*;
-
-import org.junit.Test;
+import static org.fest.assertions.Assertions.assertThat;
+import static play.test.Helpers.contentAsString;
+import static play.test.Helpers.contentType;
+import static play.test.Helpers.fakeApplication;
+import static play.test.Helpers.fakeRequest;
 
 import model.LoginInfo;
-import model.UserPost;
-import model.UserPostInput;
 import model.User;
+import model.UserPostInput;
+import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import org.junit.*;
-
-import play.mvc.*;
-import play.test.*;
-import play.data.DynamicForm;
 import play.data.Form;
-import play.data.validation.ValidationError;
-import play.data.validation.Constraints.RequiredValidator;
-import play.i18n.Lang;
-import play.libs.F;
-import play.libs.F.*;
+import play.mvc.Result;
+import play.test.FakeRequest;
 import play.twirl.api.Content;
 
-import static play.test.Helpers.*;
-import static org.fest.assertions.Assertions.*;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
