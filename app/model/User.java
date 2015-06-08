@@ -11,10 +11,10 @@ public class User {
     private int id;
     private Date date;
 
-    @Constraints.Required(message="First Name")
+    @Constraints.Required(message="First Name Is Need")
     private String firstName;
 
-    @play.data.validation.Constraints.Required
+    @Constraints.Required(message="Last Name Is Need")
     private String lastName;
 
     public String getUser() {

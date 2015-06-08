@@ -5,14 +5,14 @@ import play.data.validation.Constraints;
 public class UserPostInput {
 
     @Constraints.Required(message="Requires Input To Create Post")
-    private String inputField;
+    private String postInput;
 
-    public String getInputField() {
-        return inputField;
+    public String getPostInput() {
+        return postInput;
     }
 
-    public void setInputField(String input) {
-        this.inputField = input;
+    public void setPostInput(String input) {
+        this.postInput = input;
     }
 
 }

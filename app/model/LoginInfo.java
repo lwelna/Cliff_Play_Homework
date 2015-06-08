@@ -4,13 +4,13 @@ import play.data.validation.Constraints;
 
 public class LoginInfo {
     @Constraints.Required(message="Requires Input To Login. Try Again.")
-    private String inputField;
+    private String loginName;
 
-    public String getInputField() {
-        return inputField;
+    public String getLoginName() {
+        return loginName;
     }
 
-    public void setInputField(String input) {
-        this.inputField = input;
+    public void setLoginName(String input) {
+        this.loginName = input;
     }
 }

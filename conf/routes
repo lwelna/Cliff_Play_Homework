@@ -7,7 +7,7 @@ GET    /               @controllers.Application.login()
 GET    /add            @controllers.Application.add()
 GET    /displayPosts   @controllers.Application.displayPost()
 GET    /GetPost        @controllers.Application.getPost()
-POST   /Logining       @controllers.Application.auth()
+POST   /Login          @controllers.Application.auth()
 POST   /User           @controllers.Application.addUser()
 POST   /createPost     @controllers.Application.createNewPost()
 # Map static resources from the /public folder to the /assets URL path

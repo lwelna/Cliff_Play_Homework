@@ -65,10 +65,10 @@ public class Application extends Controller {
             log.info("the errors are {}",form.data());
             return badRequest(displayPost.render("Cliff's Blogging Site", form));
         }
-        UserPostInput loginValue = form.get();
+        UserPostInput postValue = form.get();
         String user = play.mvc.Controller.session("User:");
         log.info("Creating post with username: " + user);
-        postService.addUserPost(loginValue.getInputField(), user);
+        postService.addUserPost(postValue.getPostInput(), user);
         return redirect(controllers.routes.Application.displayPost());
     }
 
@@ -81,13 +81,13 @@ public class Application extends Controller {
             return badRequest(login.render("Cliff's Blogging Site", form));
         }
         LoginInfo loginValue = form.get();
-        boolean exists = userService.checkUser(loginValue.getInputField());
+        boolean exists = userService.checkUser(loginValue.getLoginName());
         if (exists) {
-            log.info("Checking auth complete they do exist");
-            session("User:", loginValue.getInputField());
+            log.info("Checking auth complete and they do exist");
+            session("User:", loginValue.getLoginName());
             return redirect(controllers.routes.Application.displayPost());
         }
-        log.info("Checking auth complete they don't exist");
+        log.info("Checking auth complete and they don't exist");
         return badRequest(login.render("Cliff's Blogging Site", form));
     }
 
