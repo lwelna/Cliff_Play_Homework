@@ -23,8 +23,8 @@
             (function() {
                 $(function() {
                     return $.get("/GetPost", function(data) {
-                        return $.each(data, function(index, post) {
-                            return $("#post").append("<li> " + post.post + "<br>Username : " + post.user + "      " + "       Date : " + post.date + "</li>");
+                        return $.each(data, function(index, UserPost) {
+                            return $("#post").append("<li> " + UserPost.post + "<br>Username : " + UserPost.user + "      " + "       Date : " + UserPost.date + "</li>");
                          });
                      });
                 });

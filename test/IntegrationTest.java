@@ -36,7 +36,7 @@ public class IntegrationTest {
     public void testPost() {
         running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
             public void invoke(TestBrowser browser) {
-                browser.goTo("http://localhost:3333/post");
+                browser.goTo("http://localhost:3333/displayPosts");
                 assertThat(browser.pageSource()).contains("CLIFF'S BLOGGING SITE");
             }
         });

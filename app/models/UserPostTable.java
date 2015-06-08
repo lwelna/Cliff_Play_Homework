@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="user_posts")
-public class UserPost {
+public class UserPostTable {
 
     @Id
     @GeneratedValue()

@@ -11,13 +11,13 @@ public class UserPost {
     private String post;
 
     private int id;
-    private Date date;
+    private String date;
     private int postId;
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
-    public void setDate(Date string) {
+    public void setDate(String string) {
         this.date = string;
     }
     public int getPostId() {

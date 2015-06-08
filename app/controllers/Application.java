@@ -43,7 +43,7 @@ public class Application extends Controller {
     public Result login() {
         log.info("Someone Entering main site");
         session().clear();
-        return ok(login.render("Bob's Blogging Site", Form.form(LoginInfo.class)));
+        return ok(login.render("Cliff's Blogging Site", Form.form(LoginInfo.class)));
     }
 
     public Result displayPost() {
@@ -62,10 +62,11 @@ public class Application extends Controller {
         Form<UserPostInput> form = Form.form(UserPostInput.class).bindFromRequest();
         if (form.hasErrors()) {
             log.info("Errors in Form");
+            log.info("the errors are {}",form.data());
             return badRequest(displayPost.render("Cliff's Blogging Site", form));
         }
         UserPostInput loginValue = form.get();
-        String user = play.mvc.Controller.session("connected");
+        String user = play.mvc.Controller.session("User:");
         log.info("Creating post with username: " + user);
         postService.addUserPost(loginValue.getInputField(), user);
         return redirect(controllers.routes.Application.displayPost());
@@ -76,6 +77,7 @@ public class Application extends Controller {
         Form<LoginInfo> form = Form.form(LoginInfo.class).bindFromRequest();
         if (form.hasErrors()) {
             log.info("Errors in Login Form");
+            log.info("the errors are {}",form.data());
             return badRequest(login.render("Cliff's Blogging Site", form));
         }
         LoginInfo loginValue = form.get();
@@ -91,7 +93,7 @@ public class Application extends Controller {
 
     public Result getPost() {
         log.info("Getting All posts");
-        List<models.UserPost> post = postService.getAllPost();
+        List<model.UserPost> post = postService.getAllPost();
         return ok(Json.toJson(post));
     }
 
@@ -100,6 +102,7 @@ public class Application extends Controller {
         Form<User> form = Form.form(User.class).bindFromRequest();
         if (form.hasErrors()) {
             log.info("Errors in Add User Form");
+            log.info("the errors are {}",form.data());
             return badRequest(add.render("Cliff's Blogging Site", form));
         }
         User user = form.get();

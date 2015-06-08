@@ -1,13 +1,20 @@
 import views.html.*;
-import model.Input;
+
+import org.junit.Test;
+
+import model.LoginInfo;
+import model.UserPost;
+import model.UserPostInput;
 import model.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.*;
+
 import play.mvc.*;
 import play.test.*;
 import play.data.DynamicForm;
@@ -18,6 +25,7 @@ import play.i18n.Lang;
 import play.libs.F;
 import play.libs.F.*;
 import play.twirl.api.Content;
+
 import static play.test.Helpers.*;
 import static org.fest.assertions.Assertions.*;
 
@@ -39,15 +47,62 @@ public class ApplicationTest {
 
     @Test
     public void renderLogin() {
-        Content html = login.render("CLIFF'S BLOGGING SITE", Form.form(Input.class));
+        Content html = login.render("CLIFF'S BLOGGING SITE", Form.form(LoginInfo.class));
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains("CLIFF&#x27;S BLOGGING SITE");
     }
 
     @Test
     public void renderPost() {
-        Content html = post.render("CLIFF'S BLOGGING SITE", Form.form(Input.class));
+        Content html = displayPost.render("Cliff's Blogging Site", Form.form(UserPostInput.class));
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains("CLIFF&#x27;S BLOGGING SITE");
+    }
+
+    @Test
+    public void callLogin() {
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Map<String, String> formParams = new HashMap<String, String>();
+                formParams.put("inputField", "thing");
+
+                FakeRequest fakeRequest = fakeRequest().withFormUrlEncodedBody(formParams);
+
+                Result result = callAction(controllers.routes.ref.Application.auth(), fakeRequest);
+                assertThat(status(result)).isEqualTo(SEE_OTHER);
+            }
+        });
+    }
+
+    @Test
+    public void calladdUser() {
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Map<String, String> formParams = new HashMap<String, String>();
+                formParams.put("user", "thing");
+                formParams.put("firstName", "thing");
+                formParams.put("lastName", "thing");
+
+                FakeRequest fakeRequest = fakeRequest().withFormUrlEncodedBody(formParams);
+
+                Result result = callAction(controllers.routes.ref.Application.addUser(), fakeRequest);
+                assertThat(status(result)).isEqualTo(SEE_OTHER);
+            }
+        });
+    }
+
+    @Test
+    public void callCreatePost() {
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Map<String, String> formParams = new HashMap<String, String>();
+                formParams.put("inputField", "something");
+
+                FakeRequest fakeRequest = fakeRequest().withFormUrlEncodedBody(formParams).withSession("User:", "thing");
+
+                Result result = callAction(controllers.routes.ref.Application.createNewPost(), fakeRequest);
+                assertThat(status(result)).isEqualTo(SEE_OTHER);
+            }
+        });
     }
 }

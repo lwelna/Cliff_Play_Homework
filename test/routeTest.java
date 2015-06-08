@@ -10,19 +10,19 @@ public class routeTest  extends WithApplication {
 
     @Test
     public void testPostRoute() {
-        Result result = route(fakeRequest(GET, "/post"));
+        Result result = route(fakeRequest(GET, "/displayPosts"));
         assertThat(result).isNotNull();
     }
 
     @Test
     public void testLoginRoute() {
-        Result result = route(fakeRequest(GET, "/"));
+        Result result = route(fakeRequest(GET, "/add"));
         assertThat(result).isNotNull();
     }
 
     @Test
     public void testIndexRoute() {
-        Result result = route(fakeRequest(GET, "/index"));
+        Result result = route(fakeRequest(GET, "/"));
         assertThat(result).isNotNull();
     }
 
