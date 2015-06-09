@@ -39,8 +39,18 @@ public class UserServiceImpl implements UserService{
         newUser.setLastName(user.getLastName());
         newUser.setUserName(user.getUser());
         Date date = new Date();
-        System.out.println(date);
         newUser.setDate(date);
         em.persist(newUser);
+    }
+
+    public boolean checkUsername(String username)
+    {
+        List<UserInfo> query = em.createQuery("SELECT a FROM UserInfo a WHERE a.user_name = :username", UserInfo.class)
+                        .setParameter("username", username)
+                        .getResultList();
+           if (query.size() == 0) {
+               return true;
+           }
+           return false;
     }
 }

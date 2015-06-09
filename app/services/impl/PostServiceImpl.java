@@ -40,7 +40,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<model.UserPost> getAllPost() {
-        List<UserPostTable> userPostDb = em.createQuery("SELECT a FROM UserPostTable a", UserPostTable.class).getResultList();
+        List<UserPostTable> userPostDb = em.createQuery("SELECT a FROM UserPostTable a", UserPostTable.class)
+                        .getResultList();
         List<model.UserPost> tempUserPost = new ArrayList<model.UserPost>();
         for(int i = 0; i < userPostDb.size(); i++)
         {

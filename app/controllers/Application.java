@@ -1,32 +1,28 @@
 package controllers;
 
-import org.slf4j.LoggerFactory;
-import model.User;
-
 import services.PostService;
 import services.UserService;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import views.html.add;
+import views.html.displayPost;
+import views.html.login;
 
+import model.LoginInfo;
+import model.User;
+import model.UserPostInput;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-
-import views.html.*;
-
-import model.UserPostInput;
-
-import model.LoginInfo;
-import org.slf4j.Logger;
-
-import play.*;
-import play.mvc.*;
-
 import java.util.List;
 
 @org.springframework.stereotype.Controller
 public class Application extends Controller {
+
     @Autowired
     private UserService userService;
 
@@ -106,13 +102,20 @@ public class Application extends Controller {
             return badRequest(add.render("Cliff's Blogging Site", form));
         }
         User user = form.get();
-        log.info("username : {}, first name : {}, last name : {}, Adding User", user.getUser(), user.getFirstName(),user.getLastName());
-        userService.addUser(user);
-        return redirect(controllers.routes.Application.login());
+        if (userService.checkUsername(user.getUser())){
+            log.info("username : {}, first name : {}, last name : {}, Adding User", user.getUser(), user.getFirstName(),user.getLastName());
+            userService.addUser(user);
+            return redirect(controllers.routes.Application.login());
+        }
+        log.info("Multiple people with same name");
+        log.info("the errors are {}",form.data());
+        form.reject("user","Username has been used");
+        return badRequest(add.render("Cliff's Blogging Site", form));
     }
 
     public boolean check() {
             String user = session("User:");
             return (user != null);
     }
+
 }

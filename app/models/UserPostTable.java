@@ -22,8 +22,8 @@ public class UserPostTable {
     @Column(name="user_name")
     private String userName;
 
-    @Column(name="date")
-    private Date date;
+    @Column(name="date_of_creation_of_post")
+    private Date date_of_creation_of_post;
 
     @Column(name="post")
     private String post;
@@ -35,31 +35,41 @@ public class UserPostTable {
     public String getUserName() {
         return userName;
     }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
     public Date getDate() {
-        return date;
+        return date_of_creation_of_post;
     }
+
     public void setDate(Date string) {
-        this.date = string;
+        this.date_of_creation_of_post = string;
     }
+
     public int getIdPost() {
         return idPost;
     }
+
     public void setIdPost(int idPost) {
         this.idPost = idPost;
     }
+
     public String getPost() {
         return post;
     }
+
     public void setPost(String post) {
         this.post = post;
     }
+
     public UserInfo getId() {
         return user;
     }
+
     public void setId(UserInfo object) {
         this.user = object;
     }
+
 }

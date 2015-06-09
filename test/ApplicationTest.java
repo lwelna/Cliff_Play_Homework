@@ -1,8 +1,16 @@
 import static org.fest.assertions.Assertions.assertThat;
+import static play.mvc.Http.Status.SEE_OTHER;
+import static play.test.Helpers.callAction;
 import static play.test.Helpers.contentAsString;
 import static play.test.Helpers.contentType;
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.fakeRequest;
+import static play.test.Helpers.running;
+import static play.test.Helpers.status;
+
+import views.html.add;
+import views.html.displayPost;
+import views.html.login;
 
 import model.LoginInfo;
 import model.User;
@@ -16,8 +24,6 @@ import play.twirl.api.Content;
 
 import java.util.HashMap;
 import java.util.Map;
-
-
 /**
 *
 * Simple (JUnit) tests that can call all parts of a play app.
@@ -74,7 +80,7 @@ public class ApplicationTest {
                 FakeRequest fakeRequest = fakeRequest().withFormUrlEncodedBody(formParams);
 
                 Result result = callAction(controllers.routes.ref.Application.addUser(), fakeRequest);
-                assertThat(status(result)).isEqualTo(SEE_OTHER);
+                assertThat(status(result)).isNotEqualTo(SEE_OTHER);
             }
         });
     }

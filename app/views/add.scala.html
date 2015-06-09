@@ -12,8 +12,6 @@
     </div>
     <div class="container">
 
-        <ul id="user"></ul>
-
         @helper.form(action = routes.Application.addUser(), 'class -> "well form-horizontal") {
             @helper.inputText(form("user"),'_label -> "Username")
              @helper.inputText(form("firstName"),'_label -> "First Name")

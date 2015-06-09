@@ -1,21 +1,21 @@
 package model;
 
 import play.data.validation.Constraints;
-
 import java.util.Date;
 
 public class User {
+
     @play.data.validation.Constraints.Required(message="Username is need to create a new account")
     private String user;
-
-    private int id;
-    private Date date;
 
     @Constraints.Required(message="First Name Is Need")
     private String firstName;
 
     @Constraints.Required(message="Last Name Is Need")
     private String lastName;
+
+    private int id;
+    private Date date;
 
     public String getUser() {
         return user;

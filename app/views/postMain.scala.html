@@ -12,23 +12,20 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
         </script>
         <script>
-            function startRefresh() {
-            $.get('', function(data) {
-                $(document.body).html(data);
+        window.setInterval("refreshDiv()", 1000);
+        function refreshDiv(){
+            var box = $('<label/>', {
+                id: 'post',
             });
-            }
-            $(function() {
-                setTimeout(startRefresh,10000);
-            });
-            (function() {
-                $(function() {
-                    return $.get("/GetPost", function(data) {
-                        return $.each(data, function(index, UserPost) {
-                            return $("#post").append("<li> " + UserPost.post + "<br>Username : " + UserPost.user + "      " + "       Date : " + UserPost.date + "</li>");
-                         });
-                     });
+
+            $.get("/GetPost", function(data) {
+                $.each(data, function(index, UserPost) {
+                    box.append("<li> " + UserPost.post + "<br>Username : " + UserPost.user + "      " + "       Date : " + UserPost.date + "</li>");
                 });
-             }).call(this);
+
+                $('#post').replaceWith(box);
+            });
+        }
           </script
      </head>
     <body>

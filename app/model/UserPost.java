@@ -2,14 +2,12 @@ package model;
 
 import play.data.validation.Constraints.Required;
 
-import java.util.Date;
-
 public class UserPost {
-    private String user;
 
     @Required(message="Input Is Required To Make A Post")
     private String post;
 
+    private String user;
     private int id;
     private String date;
     private int postId;

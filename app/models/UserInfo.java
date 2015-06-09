@@ -24,8 +24,8 @@ public class UserInfo {
     private String last_name;
 
     @GeneratedValue()
-    @Column(name="date")
-    private Date date;
+    @Column(name="date_of_creation_of_user")
+    private Date date_of_creation_of_user;
 
 
     @Column(name="user_name")
@@ -56,11 +56,11 @@ public class UserInfo {
     }
 
     public Date getDate() {
-        return date;
+        return date_of_creation_of_user;
     }
 
     public void setDate(Date string) {
-        this.date = string;
+        this.date_of_creation_of_user = string;
     }
 
     public int getId() {

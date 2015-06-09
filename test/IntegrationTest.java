@@ -15,6 +15,7 @@ public class IntegrationTest {
     /**
      * Need to add /post tests
      */
+
     @Test
     public void testIndex() {
         running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
@@ -24,6 +25,7 @@ public class IntegrationTest {
             }
         });
     }
+
     @Test
     public void test() {
         running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
@@ -33,6 +35,7 @@ public class IntegrationTest {
             }
         });
     }
+
     @Test
     public void testPost() {
         running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
