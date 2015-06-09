@@ -1,10 +1,12 @@
 package model;
 
+import play.data.validation.Constraints.MaxLength;
 import play.data.validation.Constraints.Required;
 
 public class UserPost {
 
     @Required(message="Input Is Required To Make A Post")
+    @MaxLength(value = 255)
     private String post;
 
     private String user;

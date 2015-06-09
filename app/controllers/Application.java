@@ -46,8 +46,7 @@ public class Application extends Controller {
 
     public Result displayPost() {
         log.info("Someone Entering Posts");
-        boolean hasLoginIn = check();
-        if (hasLoginIn) {
+        if (check()) {
             return ok(displayPost.render("Cliff's Blogging Site", Form.form(UserPostInput.class)));
         } else {
             log.info("Someone try entering the post without login");
@@ -59,7 +58,6 @@ public class Application extends Controller {
         log.info("Creating new Post");
         Form<UserPostInput> form = Form.form(UserPostInput.class).bindFromRequest();
         if (form.hasErrors()) {
-            log.info("Errors in Form");
             log.info("the errors are {}",form.data());
             return badRequest(displayPost.render("Cliff's Blogging Site", form));
         }
@@ -74,7 +72,6 @@ public class Application extends Controller {
         log.info("Checking auth");
         Form<LoginInfo> form = Form.form(LoginInfo.class).bindFromRequest();
         if (form.hasErrors()) {
-            log.info("Errors in Login Form");
             log.info("the errors are {}",form.data());
             return badRequest(login.render("Cliff's Blogging Site", form));
         }
@@ -119,5 +116,4 @@ public class Application extends Controller {
             String user = session("User:");
             return (user != null);
     }
-
 }
