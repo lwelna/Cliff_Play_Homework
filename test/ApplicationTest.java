@@ -54,6 +54,8 @@ public class ApplicationTest {
         assertThat(contentAsString(html)).contains("CLIFF&#x27;S BLOGGING SITE");
     }
 
+    //Test the login in form
+
     @Test
     public void callLogin() {
         running(fakeApplication(), new Runnable() {
@@ -92,6 +94,8 @@ public class ApplicationTest {
 //            }
 //        });
 //    }
+
+    //These test were or not the forms accept this input if they do they fail
 
     @Test
     public void calladdUser1() {
@@ -241,7 +245,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void callCreatePost2() {
+    public void callCreatePost1() {
         running(fakeApplication(), new Runnable() {
             public void run() {
                 Map<String, String>

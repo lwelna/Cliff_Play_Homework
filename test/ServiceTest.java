@@ -36,6 +36,8 @@ public class ServiceTest extends AbstractTransactionalJUnit4SpringContextTests {
     @Autowired
     private PostService postService;
 
+    //Tests adding users and posts to the in memory database
+
     @Test
     public void createUser() {
         User user = new User();

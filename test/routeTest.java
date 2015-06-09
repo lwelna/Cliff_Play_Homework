@@ -33,4 +33,5 @@ public class routeTest  extends WithApplication {
         Result result = route(fakeRequest(GET, "/GetPost"));
         assertThat(result).isNotNull();
     }
+
 }
