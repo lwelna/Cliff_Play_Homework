@@ -1,5 +1,6 @@
 package configs;
 
+
 import org.springframework.orm.jpa.vendor.Database;
 
 import org.springframework.context.annotation.Bean;
