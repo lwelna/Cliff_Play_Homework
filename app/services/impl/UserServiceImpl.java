@@ -1,10 +1,10 @@
 package services.impl;
 
 import models.UserInfo;
+import model.User;
 
 import services.UserService;
 
-import model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

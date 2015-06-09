@@ -1,5 +1,9 @@
 package controllers;
 
+import model.LoginInfo;
+import model.User;
+import model.UserPostInput;
+
 import services.PostService;
 import services.UserService;
 
@@ -7,9 +11,6 @@ import views.html.add;
 import views.html.displayPost;
 import views.html.login;
 
-import model.LoginInfo;
-import model.User;
-import model.UserPostInput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

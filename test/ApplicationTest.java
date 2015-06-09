@@ -1,3 +1,11 @@
+import model.LoginInfo;
+import model.User;
+import model.UserPostInput;
+
+import views.html.add;
+import views.html.displayPost;
+import views.html.login;
+
 import static org.fest.assertions.Assertions.assertThat;
 import static play.mvc.Http.Status.SEE_OTHER;
 import static play.test.Helpers.callAction;
@@ -8,13 +16,6 @@ import static play.test.Helpers.fakeRequest;
 import static play.test.Helpers.running;
 import static play.test.Helpers.status;
 
-import views.html.add;
-import views.html.displayPost;
-import views.html.login;
-
-import model.LoginInfo;
-import model.User;
-import model.UserPostInput;
 import org.junit.Test;
 
 import play.data.Form;

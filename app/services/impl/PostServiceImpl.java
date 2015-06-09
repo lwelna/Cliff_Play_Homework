@@ -1,6 +1,5 @@
 package services.impl;
 
-
 import models.UserInfo;
 import models.UserPostTable;
 

@@ -1,13 +1,14 @@
 import static org.fest.assertions.Assertions.assertThat;
 
-import configs.AppConfig;
-import configs.TestDataConfig;
+import model.User;
+import model.UserPost;
 
 import services.PostService;
 import services.UserService;
 
-import model.User;
-import model.UserPost;
+import configs.AppConfig;
+import configs.TestDataConfig;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
