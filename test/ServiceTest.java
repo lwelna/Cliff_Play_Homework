@@ -1,15 +1,10 @@
 import static org.fest.assertions.Assertions.assertThat;
-import static play.test.Helpers.fakeRequest;
-import static play.test.Helpers.fakeApplication;
 
 import configs.AppConfig;
 import configs.TestDataConfig;
 
 import services.PostService;
 import services.UserService;
-import views.html.add;
-import views.html.displayPost;
-import views.html.login;
 
 import model.User;
 import model.UserPost;
@@ -18,12 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
-import play.mvc.Result;
-import play.test.FakeRequest;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @ContextConfiguration(classes = {
     AppConfig.class, TestDataConfig.class

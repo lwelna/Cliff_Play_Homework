@@ -10,14 +10,15 @@ import views.html.login;
 import model.LoginInfo;
 import model.User;
 import model.UserPostInput;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+
 import java.util.List;
 
 @org.springframework.stereotype.Controller
