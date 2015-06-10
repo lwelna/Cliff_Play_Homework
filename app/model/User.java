@@ -3,8 +3,6 @@ package model;
 import play.data.validation.Constraints;
 import play.data.validation.Constraints.MaxLength;
 
-import java.util.Date;
-
 public class User {
 
     @play.data.validation.Constraints.Required(message="Username is need to create a new account")
@@ -15,7 +13,7 @@ public class User {
     @MaxLength(value = 255)
     private String firstName;
 
-    @Constraints.Required(message="Last Name Is Required")
+    @Constraints.Required(message="Last Name Is RequiredØØ")
     @MaxLength(value = 255)
     private String lastName;
 
