@@ -42,10 +42,12 @@ public class PostServiceImpl implements PostService {
         List<UserPostTable> userPostDb = em.createQuery("SELECT a FROM UserPostTable a", UserPostTable.class)
                         .getResultList();
         List<model.UserPost> tempUserPost = new ArrayList<model.UserPost>();
+
+        //To format the right date
         for (int i = 0; i < userPostDb.size(); i++) {
             model.UserPost tempPost = new model.UserPost();
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            tempPost.setDate(dateFormat.format(userPostDb.get(i).getDate()));
+            tempPost.setDateOfCreationOfPost(dateFormat.format(userPostDb.get(i).getDate()));
             tempPost.setId(userPostDb.get(i).getIdPost());
             tempPost.setPost(userPostDb.get(i).getPost());
             tempPost.setUser(userPostDb.get(i).getUserName());

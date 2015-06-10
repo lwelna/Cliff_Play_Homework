@@ -62,8 +62,8 @@ public class Application extends Controller {
             return badRequest(displayPost.render("Cliff's Blogging Site", form));
         }
         UserPostInput postValue = form.get();
-        String user = play.mvc.Controller.session("User:");
-        log.info("Creating post with username: " + user);
+        String user = session("User");
+        log.info("Creating post with username: {}", user);
         postService.addUserPost(postValue.getPostInput(), user);
         return redirect(controllers.routes.Application.displayPost());
     }
@@ -72,17 +72,17 @@ public class Application extends Controller {
         log.info("Checking auth");
         Form<LoginInfo> form = Form.form(LoginInfo.class).bindFromRequest();
         if (form.hasErrors()) {
-            log.info("the errors are {}",form.data());
+            log.info("the errors are {}", form.data());
             return badRequest(login.render("Cliff's Blogging Site", form));
         }
         LoginInfo loginValue = form.get();
         boolean exists = userService.checkUser(loginValue.getLoginName());
         if (exists) {
-            log.info("Checking auth complete and they do exist");
-            session("User:", loginValue.getLoginName());
+            log.trace("Checking auth complete and they do exist");
+            session("User", loginValue.getLoginName());
             return redirect(controllers.routes.Application.displayPost());
         }
-        log.info("Checking auth complete and they don't exist");
+        log.trace("Checking auth complete and they don't exist");
         return badRequest(login.render("Cliff's Blogging Site", form));
     }
 
@@ -112,8 +112,8 @@ public class Application extends Controller {
         return badRequest(add.render("Cliff's Blogging Site", form));
     }
 
-    public boolean check() {
-            String user = session("User:");
-            return (user != null);
+    private boolean check() {
+        String user = session("User");
+        return (user != null);
     }
 }

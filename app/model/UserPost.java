@@ -11,14 +11,14 @@ public class UserPost {
 
     private String user;
     private int id;
-    private String date;
+    private String dateOfCreationOfPost;
     private int postId;
 
-    public String getDate() {
-        return date;
+    public String getDateOfCreationOfPost() {
+        return dateOfCreationOfPost;
     }
-    public void setDate(String string) {
-        this.date = string;
+    public void setDateOfCreationOfPost(String string) {
+        this.dateOfCreationOfPost = string;
     }
     public int getPostId() {
         return postId;

@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService{
         newUser.setLastName(user.getLastName());
         newUser.setUserName(user.getUser());
         Date date = new Date();
-        newUser.setDate(date);
+        newUser.setDateOfCreationOfUser(date);
         em.persist(newUser);
     }
 

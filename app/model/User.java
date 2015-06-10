@@ -11,16 +11,13 @@ public class User {
     @MaxLength(value = 255)
     private String user;
 
-    @Constraints.Required(message="First Name Is Need")
+    @Constraints.Required(message="First Name Is Required")
     @MaxLength(value = 255)
     private String firstName;
 
-    @Constraints.Required(message="Last Name Is Need")
+    @Constraints.Required(message="Last Name Is Required")
     @MaxLength(value = 255)
     private String lastName;
-
-    private int id;
-    private Date date;
 
     public String getUser() {
         return user;
@@ -30,27 +27,18 @@ public class User {
         this.user = user;
     }
 
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public Date getDate() {
-        return date;
-    }
-    public void setDate(Date string) {
-        this.date = string;
-    }
     public String getFirstName() {
         return firstName;
     }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
     public String getLastName() {
         return lastName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }

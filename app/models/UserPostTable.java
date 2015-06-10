@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class UserPostTable {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue
     @Column(name="id_post")
     private int idPost;
 
@@ -23,7 +23,7 @@ public class UserPostTable {
     private String userName;
 
     @Column(name="date_of_creation_of_post")
-    private Date date_of_creation_of_post;
+    private Date dateOfCreationOfPost;
 
     @Column(name="post")
     private String post;
@@ -41,11 +41,11 @@ public class UserPostTable {
     }
 
     public Date getDate() {
-        return date_of_creation_of_post;
+        return dateOfCreationOfPost;
     }
 
     public void setDate(Date string) {
-        this.date_of_creation_of_post = string;
+        this.dateOfCreationOfPost = string;
     }
 
     public int getIdPost() {

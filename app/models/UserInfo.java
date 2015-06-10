@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class UserInfo {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue
     @Column(name="id")
     private int id;
 
@@ -23,9 +23,9 @@ public class UserInfo {
     @Column(name="last_name")
     private String last_name;
 
-    @GeneratedValue()
+    @GeneratedValue
     @Column(name="date_of_creation_of_user")
-    private Date date_of_creation_of_user;
+    private Date dateOfCreationOfUser;
 
 
     @Column(name="user_name")
@@ -55,12 +55,12 @@ public class UserInfo {
         this.user_name = user_name;
     }
 
-    public Date getDate() {
-        return date_of_creation_of_user;
+    public Date getDateOfCreationOfUser() {
+        return dateOfCreationOfUser;
     }
 
-    public void setDate(Date string) {
-        this.date_of_creation_of_user = string;
+    public void setDateOfCreationOfUser(Date string) {
+        this.dateOfCreationOfUser = string;
     }
 
     public int getId() {
